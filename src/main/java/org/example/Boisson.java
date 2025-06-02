@@ -1,11 +1,13 @@
 package org.example;
 
 
+import java.util.Objects;
+
 public class Boisson {
     private String id;
     private String nom;
     private int prix;
-    private String description;
+
 
     public Boisson(String id, String nom, int prix) {
         this.id = id;
@@ -23,10 +25,22 @@ public class Boisson {
         return nom;
     }
 
-    public int getPrix() {
+    public  int getPrix() {
         return prix;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Boisson boisson = (Boisson) o;
+        return Objects.equals(id, boisson.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
 

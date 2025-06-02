@@ -17,7 +17,7 @@ public class Distributeur {
 
     //Methode pour consulter liste boissons
     public Map<Boisson, Integer> consulterBoisson(){
-        Map<Boisson, Integer> boissons = Stock.getBoissonsDisponibles();
+        Map<Boisson, Integer> boissons = stockBoissons.getBoissonsDisponibles();
         if (boissons == null){
             System.out.println("Aucune boisson disponible !");
         }
