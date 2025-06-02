@@ -1,4 +1,6 @@
 package org.example;
 
-public class TypeUtilisateur {
+public enum TypeUtilisateur {
+    CLIENT,
+    PERSONNEL
 }
