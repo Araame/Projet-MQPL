@@ -1,15 +1,13 @@
 package org.example;
 
 
-import java.util.Objects;
-
 public class Boisson {
     private String id;
     private String nom;
-    private double prix;
+    private int prix;
     private String description;
 
-    public Boisson(String id, String nom, double prix) {
+    public Boisson(String id, String nom, int prix) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
@@ -25,7 +23,7 @@ public class Boisson {
         return nom;
     }
 
-    public double getPrix() {
+    public int getPrix() {
         return prix;
     }
 

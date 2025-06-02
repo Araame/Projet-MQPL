@@ -3,12 +3,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-
-
 public class Distributeur {
-    Stock stockBoissons;
-    List<Transaction> transactions;
-    Portefeuille portefeuille;
+    private Stock stockBoissons;
+    private List<Transaction> transactions;
+    private Portefeuille portefeuille;
+
     public Distributeur(){
         this.stockBoissons = new Stock();
         this.portefeuille = new Portefeuille();
@@ -22,40 +21,33 @@ public class Distributeur {
         if (boissons == null){
             System.out.println("Aucune boisson disponible !");
         }
-        else {
-            System.out.println("Voici les boissons disponibles :");
-            return boissons;
-        }
+
+        System.out.println("Voici les boissons disponibles :");
+        return boissons;
+
 
     }
 
     //Methode pour acheter une boisson
     public Transaction acheterBoisson(Boisson boisson, int quantite, int montantInseree){
-        Integer cout = Boisson.getPrix();
-        if (cout < montantInseree){
-            System.out.println("Achat validé !");
-            Stock.retirerBoissons(boisson, quantite);
-            Portefeuille.ajouterMontant(cout);
-            int monnaie = Portefeuille.calculerMonnaie(cout, montantInseree);
-            Transaction transaction = new Transaction(cout, monnaie, montantInseree);
-            transactions.add(transaction);
-            return transaction;
-        }
-        else if (cout == montantInseree){
-            System.out.println("Achat validé !");
-            Stock.retirerBoissons(boisson, quantite);
-            Portefeuille.ajouterMontant(cout);
-            Transaction transaction = new Transaction(cout,montantInseree);
-            transactions.add(transaction);
-            return transaction;
-        }
-        else{
+        int cout = boisson.getPrix();
+        if (cout >= montantInseree){
             System.out.println("Montant insuffisant !");
         }
+
+
+        System.out.println("Achat validé !");
+        stockBoissons.retirerBoissons(boisson, quantite);
+        portefeuille.ajouterMontant(cout);
+        int monnaie = portefeuille.calculerMonnaie(cout, montantInseree);
+        Transaction transaction = new Transaction( montantInseree,boisson, monnaie);
+        transactions.add(transaction);
+        return transaction;
+
     }
 
     public void rechargerStock(Boisson boisson, int quantite){
-        Stock.ajouterBoisson(boisson,quantite);
+        stockBoissons.ajouterBoissons(boisson,quantite);
 
     }
 
@@ -63,8 +55,8 @@ public class Distributeur {
         if (transactions == null){
             System.out.println("Aucune transaction pour l'instant");
         }
-        else {
-            return new ArrayList<>(transactions);
-        }
+
+        return new ArrayList<>(transactions);
+
     }
 }

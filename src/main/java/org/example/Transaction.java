@@ -6,11 +6,11 @@ import java.util.UUID; // Pour générer un ID unique
 public class Transaction {
     private String id;
     private Date date;
-    private double montantPaye;
+    private int montantPaye;
     private Boisson boissonAchetee;
-    private double monnaieRendue;
+    private int monnaieRendue;
 
-    public Transaction(double montantPaye, Boisson boissonAchetee, double monnaieRendue) {
+    public Transaction(int montantPaye, Boisson boissonAchetee, int monnaieRendue) {
         this.id = UUID.randomUUID().toString();
         this.date = new Date();
         this.montantPaye = montantPaye;
@@ -27,7 +27,7 @@ public class Transaction {
         return date;
     }
 
-    public double getMontantPaye() {
+    public int getMontantPaye() {
         return montantPaye;
     }
 
@@ -35,7 +35,7 @@ public class Transaction {
         return boissonAchetee;
     }
 
-    public double getMonnaieRendue() {
+    public int getMonnaieRendue() {
         return monnaieRendue;
     }
 
