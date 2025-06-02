@@ -15,7 +15,7 @@ public class Portefeuille {
     public  boolean ajouterMontant(int montant) {
         if (montant > 0) {
             this.solde += montant;
-            System.out.println("Montant ajouté : " + String.format("%.2f", montant) + "€");
+            System.out.println("Montant ajouté : " + String.format("%.2f", montant) + "Francs");
             return true;
         }
         System.out.println("Impossible d'ajouter un montant négatif ou nul.");
@@ -26,7 +26,7 @@ public class Portefeuille {
     public boolean retirerMontant(int montant) {
         if (montant > 0 && this.solde >= montant) {
             this.solde -= montant;
-            System.out.println("Montant retiré : " + String.format("%.2f", montant) + "€");
+            System.out.println("Montant retiré : " + String.format("%.2f", montant) + "francs");
             return true;
         }
         System.out.println("Impossible de retirer : solde insuffisant ou montant invalide.");

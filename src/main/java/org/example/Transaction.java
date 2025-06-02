@@ -1,7 +1,7 @@
 package org.example;
 
 import java.util.Date;
-import java.util.UUID; // Pour générer un ID unique
+import java.util.UUID;
 
 public class Transaction {
     private String id;

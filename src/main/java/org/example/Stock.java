@@ -1,4 +1,5 @@
 package org.example;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,16 @@ public class Stock {
         return true;
     }
 
-    public  Map<Boisson, Integer> getBoissonsDisponibles(){
-        for (Map.entry)
+    public Map<Boisson, Integer> getBoissonsDisponibles() {
+        Map<Boisson, Integer> disponibles = new HashMap<>();
+        for (Map.Entry<Boisson, Integer> entry : quantiteParBoisson.entrySet()) {
+            if (entry.getValue() > 0) {
+                disponibles.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return Collections.unmodifiableMap(disponibles);
+    }
+    public boolean contientBoisson(Boisson boisson) {
+        return quantiteParBoisson.containsKey(boisson);
     }
 }
