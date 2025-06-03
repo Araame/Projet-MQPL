@@ -1,5 +1,4 @@
 package org.example;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,19 +26,15 @@ public class Stock {
     }
 
     public boolean retirerBoissons(Boisson boisson, int quantite){
-        int quantiteRestante = getQuantite(boisson);
-        quantiteParBoisson.put(boisson, quantiteRestante - quantite);
-        return true;
+        if (contientBoisson(boisson) && this.quantiteParBoisson.get(boisson) >= quantite) {
+            this.quantiteParBoisson.put(boisson, this.quantiteParBoisson.get(boisson) - quantite);
+            return true;
+        }
+        return false;
     }
 
     public Map<Boisson, Integer> getBoissonsDisponibles() {
-        Map<Boisson, Integer> disponibles = new HashMap<>();
-        for (Map.Entry<Boisson, Integer> entry : quantiteParBoisson.entrySet()) {
-            if (entry.getValue() > 0) {
-                disponibles.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return Collections.unmodifiableMap(disponibles);
+        return new HashMap<>(this.quantiteParBoisson);
     }
     public boolean contientBoisson(Boisson boisson) {
         return quantiteParBoisson.containsKey(boisson);

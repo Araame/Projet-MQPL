@@ -16,7 +16,7 @@ public class Distributeur {
     }
 
     //Methode pour consulter liste boissons
-    public Map<Boisson, Integer> consulterBoisson(){
+    public Map<Boisson, Integer> consulterBoissons(){
         Map<Boisson, Integer> boissons = stockBoissons.getBoissonsDisponibles();
         if (boissons == null){
             System.out.println("Aucune boisson disponible !");
@@ -30,6 +30,10 @@ public class Distributeur {
 
     //Methode pour acheter une boisson
     public Transaction acheterBoisson(Boisson boisson, int quantite, int montantInseree){
+        if (!stockBoissons.contientBoisson(boisson) || stockBoissons.getQuantite(boisson) < 1) {
+            System.out.println("Boisson non disponible ou en rupture de stock.");
+            return null;
+        }
         int cout = boisson.getPrix();
         if (cout >= montantInseree){
             System.out.println("Montant insuffisant !");
@@ -51,7 +55,7 @@ public class Distributeur {
 
     }
 
-    public List<Transaction> afficherJournalVente(){
+    public List<Transaction> afficherJournalVentes(){
         if (transactions == null){
             System.out.println("Aucune transaction pour l'instant");
         }
