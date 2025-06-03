@@ -29,14 +29,13 @@ public class Distributeur {
     }
 
     //Methode pour acheter une boisson
-    public Transaction acheterBoisson(Boisson boisson, int quantite, int montantInseree){
-        if (!stockBoissons.contientBoisson(boisson) || stockBoissons.getQuantite(boisson) < 1) {
-            System.out.println("Boisson non disponible ou en rupture de stock.");
-            return null;
+    public Transaction acheterBoisson(Boisson boisson, int quantite, int montantInseree) throws Exception{
+        if (!stockBoissons.contientBoisson(boisson) || stockBoissons.getQuantite(boisson) < quantite) {
+            throw new Exception("Boisson non disponible ou en rupture de stock.");
         }
         int cout = boisson.getPrix();
         if (cout >= montantInseree){
-            System.out.println("Montant insuffisant !");
+            throw new Exception("Montant insuffisant !");
         }
 
 

@@ -1,62 +1,51 @@
 package org.example;
 
-
-
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        // Création du distributeur
-        Distributeur distributeur = new Distributeur();
-
-        // Création de boissons
-        Boisson cafe = new Boisson("B001", "Café", 100);
-        Boisson the = new Boisson("B002", "Thé", 80);
-        Boisson jus = new Boisson("B003", "Jus de fruits", 150);
-
-        // Rechargement du stock par un utilisateur de type PERSONNEL
-        Utilisateur personnel = new Utilisateur("Alice", TypeUtilisateur.PERSONNEL);
-        personnel.rechargerDistributeur(distributeur, cafe, 10);
-        personnel.rechargerDistributeur(distributeur, the, 5);
-        personnel.rechargerDistributeur(distributeur, jus, 7);
-
-        System.out.println("--- Stock après rechargement ---");
-        distributeur.consulterBoissons().forEach((boisson, quantite) ->
-                System.out.println(boisson.getNom() + ": " + quantite)
-        );
-        System.out.println("---------------------------------");
 
 
-        // Création d'utilisateurs
-        Utilisateur client1 = new Utilisateur("Bob", TypeUtilisateur.CLIENT);
-        Utilisateur client2 = new Utilisateur("Charlie", TypeUtilisateur.CLIENT);
-
-        // Achats par les clients
-        System.out.println("\n--- Achats des clients ---");
-        client1.effectuerAchat(distributeur, cafe, 200, 1); // Achat réussi
-        client2.effectuerAchat(distributeur, the, 50, 1); // Montant insuffisant
-        client1.effectuerAchat(distributeur, jus, 150, 2); // Quantité insuffisante ou boisson non disponible
-        client2.effectuerAchat(distributeur, cafe, 100, 1); // Achat réussi
-
-        System.out.println("\n--- Stock après achats ---");
-        distributeur.consulterBoissons().forEach((boisson, quantite) ->
-                System.out.println(boisson.getNom() + ": " + quantite)
-        );
-        System.out.println("----------------------------");
+        Boisson cafe = new Boisson("B001", "Café", 200);
+        Boisson the = new Boisson("B002", "Thé", 150);
+        Boisson eau = new Boisson("B003", "Eau", 100);
 
 
-        // Affichage du journal des ventes
-        System.out.println("\n--- Journal des ventes ---");
-        if (distributeur.afficherJournalVentes().isEmpty()) {
-            System.out.println("Aucune transaction pour l'instant.");
-        } else {
-            distributeur.afficherJournalVentes().forEach(transaction -> {
-                System.out.println("ID Transaction: " + transaction.getId());
-                System.out.println("Date: " + transaction.getDate());
-                System.out.println("Boisson achetée: " + transaction.getBoissonAchetee().getNom());
-                System.out.println("Montant payé: " + transaction.getMontantPaye());
-                System.out.println("Monnaie rendue: " + transaction.getMonnaieRendue());
-                System.out.println("---");
-            });
+        Distributeur monDistributeur = new Distributeur();
+
+
+        Utilisateur client1 = new Utilisateur("Alice", TypeUtilisateur.CLIENT);
+        Utilisateur personnel1 = new Utilisateur("Bob", TypeUtilisateur.PERSONNEL);
+
+
+        System.out.println("--- Rechargement du stock par le personnel ---");
+        personnel1.rechargerDistributeur(monDistributeur, cafe, 10);
+        personnel1.rechargerDistributeur(monDistributeur, the, 5);
+        personnel1.rechargerDistributeur(monDistributeur, eau, 20);
+        System.out.println("---------------------------------------------\n");
+
+
+        System.out.println("--- Boissons disponibles à la consultation ---");
+        Map<Boisson, Integer> boissonsDisponibles = monDistributeur.consulterBoissons();
+        boissonsDisponibles.forEach((boisson, quantite) ->
+                System.out.println("- " + boisson.getNom() + " : " + quantite + " unités (Prix : " + boisson.getPrix() + " F CFA)"));
+        System.out.println("----------------------------------------------\n");
+
+
+        System.out.println("--- Tentative d'achat par le client ---");
+        Transaction transaction1 = null;
+        try {
+
+            transaction1 = client1.effectuerAchat(monDistributeur, cafe, 500, 1);
+            if (transaction1 != null) {
+                System.out.println("Achat de " + transaction1.getBoissonAchetee().getNom() + " réussi ! Monnaie rendue : " + transaction1.getMonnaieRendue() + " F CFA.");
+            }
+        } catch (Exception e) {
+
+            System.out.println("Échec de l'achat : " + e.getMessage());
         }
+        System.out.println("-------------------------------------\n");
     }
+
 }

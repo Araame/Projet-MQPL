@@ -21,16 +21,21 @@ public class Stock {
     }
 
     public void ajouterBoissons(Boisson boisson, int quantite) {
-        int quantiteRestante = getQuantite(boisson);
-        quantiteParBoisson.put(boisson, quantite + quantiteRestante);
+        int quantiteActuelle = getQuantite(boisson);
+        quantiteParBoisson.put(boisson, quantite + quantiteActuelle);
     }
 
-    public boolean retirerBoissons(Boisson boisson, int quantite){
-        if (contientBoisson(boisson) && this.quantiteParBoisson.get(boisson) >= quantite) {
-            this.quantiteParBoisson.put(boisson, this.quantiteParBoisson.get(boisson) - quantite);
-            return true;
+    public boolean retirerBoissons(Boisson boisson, int quantite) throws Exception{
+        if (!contientBoisson(boisson)) {
+            throw new Exception("La boisson  n'est pas présente dans le stock");
         }
-        return false;
+
+        int quantiteActuelle = getQuantite(boisson);
+        if (quantiteActuelle < quantite) {
+            throw new Exception("Stock insuffisant");
+        }
+        quantiteParBoisson.put(boisson, quantiteActuelle - quantite);
+        return true;
     }
 
     public Map<Boisson, Integer> getBoissonsDisponibles() {

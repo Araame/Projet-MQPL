@@ -13,7 +13,7 @@ public class Utilisateur {
         this.nom = nom;
         this.type = type;
     }
-    public Transaction effectuerAchat (Distributeur distributeur, Boisson boisson, int montant, int quantite){
+    public Transaction effectuerAchat (Distributeur distributeur, Boisson boisson, int montant, int quantite) throws Exception {
 
         if (this.type == TypeUtilisateur.CLIENT) {
             return distributeur.acheterBoisson(boisson, quantite, montant);
