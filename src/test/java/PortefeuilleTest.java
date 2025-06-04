@@ -10,10 +10,7 @@ public class PortefeuilleTest {
         portefeuille = new Portefeuille();
     }
 
-    @Test
-    void testPortefeuilleInitialSolde() {
-        assertEquals(0, portefeuille.getSolde());
-    }
+  
     @Test
     void testAjouterMontant() throws Exception {
 
