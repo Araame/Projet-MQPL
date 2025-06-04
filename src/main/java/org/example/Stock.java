@@ -25,7 +25,7 @@ public class Stock {
         quantiteParBoisson.put(boisson, quantite + quantiteActuelle);
     }
 
-    public boolean retirerBoissons(Boisson boisson, int quantite) throws Exception{
+    public void retirerBoissons(Boisson boisson, int quantite) throws Exception{
         if (!contientBoisson(boisson)) {
             throw new Exception("La boisson  n'est pas présente dans le stock");
         }
@@ -35,7 +35,7 @@ public class Stock {
             throw new Exception("Stock insuffisant");
         }
         quantiteParBoisson.put(boisson, quantiteActuelle - quantite);
-        return true;
+
     }
 
     public Map<Boisson, Integer> getBoissonsDisponibles() {
