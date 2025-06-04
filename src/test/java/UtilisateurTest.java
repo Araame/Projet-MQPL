@@ -49,7 +49,7 @@ public class UtilisateurTest {
     }
 
     @Test
-    void testRechargerDistributeurPersonnelSuccess() throws Exception {
+    void testRechargerDistributeurPersonnelSucces() throws Exception {
         Utilisateur personnel = new Utilisateur("Fallou", TypeUtilisateur.PERSONNEL);
         personnel.rechargerDistributeur(distributeur, fanta, 10);
         assertEquals(13,stock.getQuantite(fanta));
