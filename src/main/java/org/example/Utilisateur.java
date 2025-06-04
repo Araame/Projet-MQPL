@@ -19,19 +19,18 @@ public class Utilisateur {
             return distributeur.acheterBoisson(boisson, quantite, montant);
         }
         else {
-            System.out.println("Cet utilisateur n'est pas autorisé à acheter du café");
-            return null;
+            throw new Exception("Cet utilisateur n'est pas autorisé à acheter cette boisson");
+
         }
     }
 
-    public void rechargerDistributeur(Distributeur distributeur, Boisson boisson, int quantite){
+    public void rechargerDistributeur(Distributeur distributeur, Boisson boisson, int quantite) throws Exception{
 
         if (this.type == TypeUtilisateur.PERSONNEL) {
             distributeur.rechargerStock(boisson, quantite);
-            System.out.println(this.nom + " (" + this.type + ") a rechargé " + quantite + " unités de " + boisson.getNom() + " dans le distributeur " + ".");
         }
         else{
-            System.out.println("Accès refusé : L'utilisateur '" + this.nom + "' (" + this.type + ") n'est pas autorisé à recharger les distributeurs.");
+            throw new Exception("L'utilisateur n'est pas autorisé à recharger le stock");
         }
 
 

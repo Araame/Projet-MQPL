@@ -18,7 +18,6 @@ public class Portefeuille {
 
         }
         this.solde += montant;
-        System.out.println("Montant ajouté : " + montant+ "Francs");
         return true;
 
     }

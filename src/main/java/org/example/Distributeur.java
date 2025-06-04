@@ -22,7 +22,6 @@ public class Distributeur {
             System.out.println("Aucune boisson disponible !");
         }
 
-        System.out.println("Voici les boissons disponibles :");
         return boissons;
 
 
@@ -39,7 +38,7 @@ public class Distributeur {
         }
 
 
-        System.out.println("Achat validé !");
+
         stockBoissons.retirerBoissons(boisson, quantite);
         portefeuille.ajouterMontant(cout);
         int monnaie = portefeuille.calculerMonnaie(cout, montantInseree);
