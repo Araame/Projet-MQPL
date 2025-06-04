@@ -34,7 +34,7 @@ public class DistributeurSteps implements En {
             if (clients.size() < 2) {
                 throw new AssertionError("Il faut deux clients pour ce test.");
             }
-            clientActuel = clients.get(1); // second client
+            clientActuel = clients.get(1);
             acheterBoisson(boisson);
         });
 
@@ -88,16 +88,16 @@ public class DistributeurSteps implements En {
         });
 
         When("un client tente de recharger le stock de {string} avec {int} unités", (String boisson, Integer qte) -> {
-            // Refusé
+
             derniereOperationRefusee = true;
         });
 
         When("un client consulte la liste des boissons", () -> {
-            // rien à faire ici
+
         });
 
         When("le personnel consulte le journal des ventes", () -> {
-            // rien à faire ici
+
         });
 
         When("le personnel tente de retirer {int} du portefeuille", (Integer montant) -> {

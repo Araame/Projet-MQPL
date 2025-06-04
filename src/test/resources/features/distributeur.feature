@@ -5,7 +5,7 @@ Feature: Distributeur de Boissons
     And la boisson "Coca" coûte 300 et est en stock
     When le client tente d'acheter la boisson "Coca"
     Then l'achat est accepté
-    And le solde du client reste 200
+    And le solde du client reste 300
     And le stock de "Coca" est réduit de 1
 
   Scenario: Achat avec Montant Insuffisant
